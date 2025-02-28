@@ -10,13 +10,13 @@ agent any
     stage("build")
           {
             steps{
-              cd  'javac Welcome.java'
+              sh  'javac Welcome.java'
             }
           }
           stage("run")
           {
             steps{
-              cd 'java Welcome'
+              sh 'java Welcome'
             }
           }
           }
