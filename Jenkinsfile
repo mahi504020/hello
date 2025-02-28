@@ -5,7 +5,7 @@ agent any
     stage("clone")
     {
       steps{
-        git 
+        git 'https://github.com/mahi504020/hello.git'
       }}
     stage("build")
           {
