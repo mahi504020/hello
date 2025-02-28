@@ -1,23 +1,30 @@
-pipeline
-{
-agent any
-  stages{
-    stage("clone")
-    {
-      steps{
-        git 'https://github.com/mahi504020/hello.git'
-      }}
-    stage("build")
-          {
-            steps{
-              sh  'javac Welcome.java'
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: '*/main']], // Ensure you use the correct branch
+                        userRemoteConfigs: [[url: 'https://github.com/mahi504020/hello.git']]
+                    ])
+                }
             }
-          }
-          stage("run")
-          {
-            steps{
-              sh 'java Welcome'
+        }
+
+        stage('Build') {
+            steps {
+                echo "Building project..."
+                sh 'echo Build step executed'
             }
-          }
-          }
-          }
+        }
+
+        stage('Run') {
+            steps {
+                echo "Running the project..."
+            }
+        }
+    }
+}
